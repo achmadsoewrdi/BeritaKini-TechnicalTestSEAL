@@ -1,9 +1,6 @@
 export default async function handler(req, res) {
-    const path = req.url.replace(/^\//, '');  // hapus leading slash saja
+    const path = req.url.replace(/^\//, '');
     const targetUrl = `https://berita-indo-api-next.vercel.app/${path}`;
-
-    console.log('req.url:', req.url);
-    console.log('targetUrl:', targetUrl);
 
     try {
         const response = await fetch(targetUrl);
