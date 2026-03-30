@@ -1,22 +1,17 @@
 import axios from 'axios';
-import { API_BASE_URL } from '../utils/constants';
 
 /**
- * Axios instance with base configuration
- * In development, uses Vite proxy (/api -> berita-indo-api)
- * In production, calls the API directly
+ * Axios instance — /api prefix works for both dev (Vite proxy) 
+ * and production (Vercel serverless function)
  */
-const isDev = import.meta.env.DEV;
-
 const api = axios.create({
-  baseURL: isDev ? '' : API_BASE_URL,
+  baseURL: '',   // Selalu pakai relative URL, proxy yang handle
   timeout: 15000,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Response interceptor for error handling
 api.interceptors.response.use(
   (response) => response,
   (error) => {
